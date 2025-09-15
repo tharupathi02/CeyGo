@@ -16,6 +16,12 @@ const Assets = {
     androidIconForeground: require('../assets/app-logo/adaptive-icon.png'),
     androidIconMonochrome: require('../assets/app-logo/adaptive-icon.png'),
   },
+
+  onboard: {
+    onboard1: require('../assets/images/onboarding/onboarding1.jpg'),
+    onboard2: require('../assets/images/onboarding/onboarding2.jpg'),
+    onboard3: require('../assets/images/onboarding/onboarding3.jpg'),
+  }
 };
 
 export default Assets;
