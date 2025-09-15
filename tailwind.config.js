@@ -5,6 +5,9 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "System"],
+      },
       colors: {
         primary: {
           DEFAULT: '#5E2BFF',

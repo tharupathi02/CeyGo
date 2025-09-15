@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Register Poppins font family and weights for NativeWind */
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/font/Poppins-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/font/Poppins-Medium.ttf");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/font/Poppins-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/font/Poppins-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Optional italics support (uncomment if needed) */
+/*
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/font/Poppins-Italic.ttf");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+*/
+
+/* Set default font to Poppins Regular across the app */
+@layer base {
+  /* NativeWind applies base rules to React Native primitives */
+  * {
+    font-family: "Poppins";
+    font-weight: 400;
+  }
+}
