@@ -23,7 +23,7 @@ const OnboardingScreen = () => {
 
   const handleGetStarted = () => {
     // Navigate to main app or home screen
-    router.replace('/');
+    router.replace('/(screens)/(tabs)');
   };
 
   const handleScroll = (event: any) => {
