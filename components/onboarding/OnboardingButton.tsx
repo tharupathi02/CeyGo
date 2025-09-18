@@ -1,3 +1,4 @@
+import { ChevronRight } from 'lucide-react-native';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
@@ -18,7 +19,7 @@ const OnboardingButton: React.FC<OnboardingButtonProps> = ({
     <View className="mx-8">
       <TouchableOpacity
         onPress={onPress}
-        className={`py-4 px-8 rounded-full ${
+        className={`py-4 px-8 rounded-full flex-row items-center justify-center ${
           isSecondary
             ? 'bg-transparent border-2 border-blue-600'
             : 'bg-blue-600'
@@ -31,7 +32,7 @@ const OnboardingButton: React.FC<OnboardingButtonProps> = ({
           },
           shadowOpacity: isSecondary ? 0 : 0.3,
           shadowRadius: 8,
-          elevation: isSecondary ? 0 : 6,
+          elevation: isSecondary ? 0 : 10,
         }}
         activeOpacity={0.8}
       >
@@ -43,6 +44,15 @@ const OnboardingButton: React.FC<OnboardingButtonProps> = ({
         >
           {title}
         </Text>
+        
+        {/* ChevronRight Icon */}
+        <View className="ml-3">
+          <ChevronRight 
+            size={20} 
+            color={isSecondary ? '#2563EB' : '#FFFFFF'} 
+            strokeWidth={2.5}
+          />
+        </View>
       </TouchableOpacity>
     </View>
   );

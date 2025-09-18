@@ -19,7 +19,7 @@ const TabIconRenderer = ({
     activeColor?: string;
     inactiveColor?: string;
 }) => {
-    const color = focused ? `${activeColor}90` : inactiveColor;
+    const color = focused ? `${activeColor}` : inactiveColor;
 
     const renderIcon = () => {
         switch (iconName) {
@@ -41,7 +41,7 @@ const TabIconRenderer = ({
             {renderIcon()}
             <Text
                 style={{
-                    color: focused ? `${activeColor}90` : inactiveColor,
+                    color: focused ? `${activeColor}` : inactiveColor,
                 }}
                 className={`${focused ? "font-poppins-bold" : "font-poppins-regular"
                     } w-full text-center mt-1 text-sm`}
