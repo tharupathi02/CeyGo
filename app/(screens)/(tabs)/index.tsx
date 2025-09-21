@@ -22,9 +22,10 @@ const HomeScreen = () => {
         <TopBar />
       </View>
 
-      <ScrollView className='flex-1' contentContainerStyle={{ paddingBottom: 20 }}>
+      <ScrollView className='flex-1' contentContainerStyle={{ paddingBottom: 80 }}>
         {/* Top Section with Balance */}
         <View className='bg-[#4F46E5] pb-10 rounded-b-3xl'>
+          
           {/* Balance Section */}
           <View className='flex flex-col items-center mt-5'>
             <Text className='text-white/70 text-center mt-5'>Total balance</Text>
@@ -43,11 +44,11 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
 
-
         </View>
 
         {/* Services Section */}
         <View className='px-6 mt-6 flex flex-col gap-4 flex-1'>
+          
           {/* Service List Header */}
           <View className='flex-row justify-between items-center mb-6 mt-2'>
             <Text className='text-lg font-bold text-gray-800'>Service List</Text>
