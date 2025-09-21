@@ -1,8 +1,11 @@
 import { Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 const TopBar: React.FC = () => {
+
+    const router = useRouter();
 
     const name = "Deshan Tharupathi";
     const greeting = "Good Morning";
@@ -13,7 +16,7 @@ const TopBar: React.FC = () => {
     }
 
     const onNotificationPress = () => {
-        console.log('Notification Pressed');
+        router.push('/(screens)/notifications/notifications-screen');
     }
 
 
