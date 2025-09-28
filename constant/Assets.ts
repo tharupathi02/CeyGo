@@ -21,7 +21,11 @@ const Assets = {
     onboard1: require('../assets/images/onboarding/onboarding1.jpg'),
     onboard2: require('../assets/images/onboarding/onboarding2.jpg'),
     onboard3: require('../assets/images/onboarding/onboarding3.jpg'),
-  }
+  },
+
+  animations: {
+    success: require('../assets/lottie/trophy.json'),
+  },
 };
 
 export default Assets;

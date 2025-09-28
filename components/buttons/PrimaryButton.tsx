@@ -8,6 +8,7 @@ interface PrimaryButtonProps {
   loading?: boolean;
   fullWidth?: boolean;
   trailingIcon?: React.ReactNode;
+  className?: string;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -17,6 +18,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   loading = false,
   fullWidth = true,
   trailingIcon,
+  className,
 }) => {
   const isDisabled = disabled || loading;
   const backgroundClass = isDisabled ? "bg-primary-200" : "bg-primary-500";
@@ -30,7 +32,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       disabled={isDisabled}
       className={`rounded-2xl ${backgroundClass} ${
         fullWidth ? "w-full" : ""
-      }`}
+      } ${className}`}
     >
       <View className="flex-row items-center justify-center px-6 py-4">
         {loading ? (

@@ -1,16 +1,18 @@
 import AppTopBar from "@/components/appbar/AppTopBar";
+import TopUpPaymentSheet from "@/components/bottom-sheets/TopUpPaymentSheet";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import NumericKeypad, { KeypadKey } from "@/components/topup/NumericKeypad";
 import QuickAmountSelector, {
   QuickAmountOption,
 } from "@/components/topup/QuickAmountSelector";
 import TopUpAmountDisplay from "@/components/topup/TopUpAmountDisplay";
+import { useRouter } from "expo-router";
 import React, { useMemo, useState } from "react";
 import { Text, View } from "react-native";
-import TopUpPaymentSheet from "@/components/bottom-sheets/TopUpPaymentSheet";
 import { toast } from "sonner-native";
 
 const TopUpScreen: React.FC = () => {
+  const router = useRouter();
   const [amount, setAmount] = useState<string>("");
   const [selectedQuickAmount, setSelectedQuickAmount] = useState<string | null>(
     null
@@ -125,10 +127,9 @@ const TopUpScreen: React.FC = () => {
 
   const paymentMethodLabels: Record<string, string> = useMemo(
     () => ({
-      wallet: "Wallet Balance",
-      card: "Debit / Credit Card",
-      mobile: "Mobile Payment",
-      bank: "Bank Transfer",
+      "card": "Debit / Credit Card",
+      "apple-pay": "Apple Pay",
+      "google-pay": "Google Pay",
     }),
     []
   );
@@ -137,12 +138,18 @@ const TopUpScreen: React.FC = () => {
     const formattedAmount = formatAmountForAlert(amount);
     const methodLabel = paymentMethodLabels[methodKey] ?? "Selected method";
 
-    setPaymentSheetVisible(false);
-
-    toast.success("Top-up Successful", {
-      description: `You'll top up LKR ${formattedAmount} via ${methodLabel}.`,
+    router.replace({
+      pathname: "/(screens)/payment-success/payment-success-screen",
+      params: {
+        status: "success",
+        amount: formattedAmount,
+        method: methodLabel,
+        reference: `TXN-${Math.floor(Math.random() * 900000 + 100000)}`,
+        date: new Date().toLocaleString(),
+      },
     });
 
+    setPaymentSheetVisible(false);
     setAmount("");
     setSelectedQuickAmount(null);
   };
