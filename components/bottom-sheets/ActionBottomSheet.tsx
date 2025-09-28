@@ -139,21 +139,11 @@ const ActionBottomSheet: React.FC<ActionBottomSheetProps> = ({
                 `}
                 activeOpacity={action.disabled ? 1 : 0.7}
               >
-                <View className={`
-                  w-12 h-12 rounded-full items-center justify-center mr-4
-                  ${action.destructive 
-                    ? 'bg-red-50' 
-                    : 'bg-blue-50'
-                  }
-                `}>
+                <View className="w-12 h-12 rounded-full items-center justify-center mr-4">
                   {action.icon}
                 </View>
                 <Text className={`
                   font-poppins-medium text-base flex-1
-                  ${action.destructive 
-                    ? 'text-red-600' 
-                    : 'text-gray-900'
-                  }
                   ${action.disabled ? 'text-gray-400' : ''}
                 `}>
                   {action.label}

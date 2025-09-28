@@ -77,7 +77,7 @@ const AppTopBar: React.FC<AppTopBarProps> = ({
         {/* Center Section - Title */}
         <View className="flex-2 items-center">
           <Text 
-            className="font-poppins-bold text-lg text-center"
+            className="font-poppins-medium text-lg text-center"
             style={{ color: textColor }}
             numberOfLines={1}
             ellipsizeMode="tail"

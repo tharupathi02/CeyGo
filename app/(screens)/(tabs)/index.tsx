@@ -8,8 +8,12 @@ import React, { useRef } from 'react'
 import { ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import AppColors from '../../../constant/Colors'
+import { useRouter } from 'expo-router'
 
 const HomeScreen = () => {
+
+  const router = useRouter()
+
   // Ref for the bottom sheet
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -73,7 +77,7 @@ const HomeScreen = () => {
                 title="Top Up"
                 backgroundColorClass="bg-orange-50"
                 iconColor="#F57C00"
-                onPress={() => console.log('Top Up pressed')}
+                onPress={() => router.push('/(screens)/top-up/top-up-screen')}
               />
               <ServiceButton
                 icon={Ticket}
