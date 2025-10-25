@@ -84,7 +84,7 @@ const HomeScreen = () => {
                 title="My Tickets"
                 backgroundColorClass="bg-pink-50"
                 iconColor="#C2185B"
-                onPress={() => console.log('My Tickets pressed')}
+                onPress={() => router.push('/(screens)/(tabs)/my-tickets')}
               />
               <ServiceButton
                 icon={BanknoteArrowUp}
