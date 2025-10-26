@@ -58,6 +58,8 @@ const FareInfo: React.FC = () => {
     setHasSearched(true);
   };
 
+  const isSheetVisible = isPickerVisible !== null
+
   return (
     <View className="flex-1 bg-white">
       <AppTopBar title="Fare Explorer" showBackButton />
@@ -195,26 +197,28 @@ const FareInfo: React.FC = () => {
         </View>
       </ScrollView>
 
-      <StationSelectSheet
-        visible={Boolean(isPickerVisible)}
-        onClose={() => setPickerVisible(null)}
-        title={
-          isPickerVisible === "from"
-            ? "Select departure station"
-            : "Select arrival station"
-        }
-        stations={busStations}
-        onSelect={(station) =>
-          isPickerVisible === "from"
-            ? handleStationSelect(setFromStationId)(station)
-            : handleStationSelect(setToStationId)(station)
-        }
-        selectedStationId={
-          isPickerVisible === "from"
-            ? fromStationId ?? undefined
-            : toStationId ?? undefined
-        }
-      />
+      {isSheetVisible ? (
+        <StationSelectSheet
+          visible={isSheetVisible}
+          onClose={() => setPickerVisible(null)}
+          title={
+            isPickerVisible === "from"
+              ? "Select departure station"
+              : "Select arrival station"
+          }
+          stations={busStations}
+          onSelect={(station) =>
+            isPickerVisible === "from"
+              ? handleStationSelect(setFromStationId)(station)
+              : handleStationSelect(setToStationId)(station)
+          }
+          selectedStationId={
+            isPickerVisible === "from"
+              ? fromStationId ?? undefined
+              : toStationId ?? undefined
+          }
+        />
+      ) : null}
     </View>
   );
 };
