@@ -102,7 +102,7 @@ const FareInfo: React.FC = () => {
           <TouchableOpacity
             activeOpacity={0.85}
             onPress={() => setPickerVisible("to")}
-            className="bg-white rounded-3xl border border-gray-100 px-5 py-4 shadow-sm shadow-indigo-100/30 flex-row items-center justify-between"
+            className="bg-white rounded-3xl border border-gray-100 px-5 py-4 mt-2 shadow-sm shadow-indigo-100/30 flex-row items-center justify-between"
           >
             <View className="flex-1 pr-4">
               <Text className="text-xs uppercase text-gray-400 font-poppins-medium">
