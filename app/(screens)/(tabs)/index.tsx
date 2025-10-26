@@ -91,7 +91,7 @@ const HomeScreen = () => {
                 title="Fare Info"
                 backgroundColorClass="bg-indigo-50"
                 iconColor="#3F51B5"
-                onPress={() => console.log('Fare Information pressed')}
+                onPress={() => router.push('/(screens)/fare-info/fare-info')}
               />
             </View>
 
