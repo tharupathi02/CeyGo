@@ -67,10 +67,10 @@ const HomeScreen = () => {
             <View className='flex-row w-full justify-between mb-4'>
               <ServiceButton
                 icon={Bus}
-                title="Bus Tickets"
+                title="Metro Plans"
                 backgroundColorClass="bg-blue-50"
                 iconColor="#1976D2"
-                onPress={() => console.log('Bus Tickets pressed')}
+                onPress={() => router.push('/(screens)/metro-plans/metro-plans')}
               />
               <ServiceButton
                 icon={CreditCard}
