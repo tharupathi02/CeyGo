@@ -116,7 +116,7 @@ const HomeScreen = () => {
                 title="History"
                 backgroundColorClass="bg-purple-50"
                 iconColor="#7B1FA2"
-                onPress={() => console.log('History pressed')}
+                onPress={() => router.push('/(screens)/history/history')}
               />
               <ServiceButton
                 icon={HeartHandshake}
