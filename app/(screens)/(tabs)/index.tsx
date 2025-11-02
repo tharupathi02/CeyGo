@@ -109,7 +109,7 @@ const HomeScreen = () => {
                 title="Timetables"
                 backgroundColorClass="bg-green-50"
                 iconColor="#388E3C"
-                onPress={() => console.log('Timetables pressed')}
+                onPress={() => router.push('/(screens)/time-table/time-table')}
               />
               <ServiceButton
                 icon={History}
