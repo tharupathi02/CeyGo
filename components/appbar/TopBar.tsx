@@ -9,7 +9,7 @@ const TopBar: React.FC = () => {
 
     const name = "Deshan Tharupathi";
     const greeting = "Good Morning";
-    const profileImage = "https://randomuser.me/api/portraits/men/1.jpg";
+    const profileImage = "https://avatar.iran.liara.run/public/11";
 
     const onProfilePress = () => {
         console.log('Profile Pressed');
