@@ -1,161 +1,101 @@
 import TopBar from '@/components/appbar/TopBar'
-import ServiceButton from '@/components/buttons/ServiceButton'
-import ActivityCard from '@/components/cards/ActivityCard'
-import recentActivities from '@/constant/mockData/activities'
-import BottomSheet from '@gorhom/bottom-sheet'
-import { BanknoteArrowUp, Bus, ClipboardClock, CreditCard, HeartHandshake, History, MapPin, Ticket } from 'lucide-react-native'
-import React, { useRef } from 'react'
-import { ScrollView, StatusBar, Text, TouchableOpacity, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import AppColors from '../../../constant/Colors'
+import HomeActivityCard from '@/components/cards/HomeActivityCard'
+import HomeServiceCard from '@/components/cards/HomeServiceCard'
+import NFCCardCarousel from '@/components/sections/NFCCardCarousel'
+import { homeServices } from '@/sample/home-services'
+import { historyEntries } from '@/sample/history'
+import { cardUtils, metroCards, type MetroCard } from '@/sample/metro-cards'
+import { formatCurrency } from '@/utils/formatters'
+import { LinearGradient } from 'expo-linear-gradient'
 import { useRouter } from 'expo-router'
+import { BanknoteArrowUp, ArrowRight } from 'lucide-react-native'
+import React, { useMemo } from 'react'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const HomeScreen = () => {
-
   const router = useRouter()
 
-  // Ref for the bottom sheet
-  const bottomSheetRef = useRef<BottomSheet>(null);
+  const totalBalance = useMemo(() => cardUtils.getTotalBalance(), [])
+  const latestActivities = useMemo(() => historyEntries.slice(0, 5), [])
+
+  const handleCardPress = (card: MetroCard) => {
+    router.push({ pathname: '/(screens)/my-cards/card-details', params: { id: card.id } })
+  }
+
+  const handleActivityPress = (entryId: string) => {
+    router.push({ pathname: '/(screens)/history/history-details', params: { id: entryId } })
+  }
 
   return (
     <SafeAreaView className='flex-1 bg-white'>
-      <StatusBar barStyle="light-content" backgroundColor={AppColors.primary} />
-      
-      {/* Static TopBar */}
-      <View className='bg-[#4F46E5]'>
-        <TopBar />
-      </View>
+      <TopBar />
 
-      <ScrollView className='flex-1' contentContainerStyle={{ paddingBottom: 80 }}>
-        {/* Top Section with Balance */}
-        <View className='bg-[#4F46E5] pb-10 rounded-b-3xl'>
-          
-          {/* Balance Section */}
-          <View className='flex flex-col items-center mt-5'>
-            <Text className='text-white/70 text-center mt-5'>Total balance</Text>
-            <Text className='text-white text-5xl font-bold text-center mt-5'>2,000.00</Text>
-            <Text className='text-white/70 text-center text-sm mb-1'>Sri Lanka Rupees</Text>
-          </View>
-
-          {/* Buy Tickets Button */}
-          <View className='px-8 mt-10 items-center'>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 48 }}
+      >
+        <View>
+          <View className='flex-row items-center justify-between px-6 mb-5'>
+            <View>
+              <Text className='text-base font-poppins-semibold text-gray-900'>My Cards</Text>
+              <Text className='text-xs text-gray-500 mt-1'>Tap a card to view full details</Text>
+            </View>
             <TouchableOpacity
-              className='flex gap-2 bg-white py-4 px-6 rounded-xl flex-row items-center justify-center w-full shadow-sm'
-              onPress={() => console.log('Top Up My Wallet Pressed')}
+              onPress={() => router.push('/(screens)/(tabs)/my-cards' as never)}
+              className='rounded-full bg-slate-100 px-3 py-1'
+              activeOpacity={0.85}
             >
-              <BanknoteArrowUp size={20} color={AppColors.primary} />
-              <Text className='font-poppins-medium text-base text-[#4F46E5]'>Top Up My Wallet</Text>
+              <Text className='text-xs font-poppins-medium text-slate-600'>Manage</Text>
             </TouchableOpacity>
           </View>
 
+          <NFCCardCarousel cards={metroCards} onCardPress={handleCardPress} />
         </View>
 
-        {/* Services Section */}
-        <View className='px-6 mt-6 flex flex-col gap-4 flex-1'>
-          
-          {/* Service List Header */}
-          <View className='flex-row justify-between items-center mb-6 mt-2'>
-            <Text className='text-lg font-bold text-gray-800'>Service List</Text>
-            <TouchableOpacity>
-              <Text className='text-[#4F46E5] text-sm'>See all</Text>
+        <View className='px-6'>
+          <View className='flex-row items-center justify-between mb-5'>
+            <Text className='text-base font-poppins-semibold text-gray-900'>Services</Text>
+          </View>
+
+          <View className='flex-row flex-wrap gap-4'>
+            {homeServices.map(service => (
+              <View key={service.id} style={{ flexBasis: '48%', flexGrow: 1 }}>
+                <HomeServiceCard service={service} onPress={() => router.push(service.route as never)} />
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View className='mt-10 px-6'>
+          <View className='flex-row items-center justify-between mb-5'>
+            <Text className='text-base font-poppins-semibold text-gray-900'>Latest activity</Text>
+            <TouchableOpacity
+              onPress={() => router.push('/(screens)/history/history')}
+              activeOpacity={0.85}
+            >
+              <Text className='text-xs font-poppins-medium text-indigo-600'>View history</Text>
             </TouchableOpacity>
           </View>
 
-          {/* Services Grid */}
-          <View className='flex-row flex-wrap justify-between mb-6'>
-            {/* First Row */}
-            <View className='flex-row w-full justify-between mb-4'>
-              <ServiceButton
-                icon={Bus}
-                title="Metro Plans"
-                backgroundColorClass="bg-blue-50"
-                iconColor="#1976D2"
-                onPress={() => router.push('/(screens)/metro-plans/metro-plans')}
+          <View className='gap-4'>
+            {latestActivities.map(entry => (
+              <HomeActivityCard
+                key={entry.id}
+                entry={entry}
+                onPress={() => handleActivityPress(entry.id)}
               />
-              <ServiceButton
-                icon={CreditCard}
-                title="Top Up"
-                backgroundColorClass="bg-orange-50"
-                iconColor="#F57C00"
-                onPress={() => router.push('/(screens)/top-up/top-up-screen')}
-              />
-              <ServiceButton
-                icon={Ticket}
-                title="My Tickets"
-                backgroundColorClass="bg-pink-50"
-                iconColor="#C2185B"
-                onPress={() => router.push('/(screens)/(tabs)/my-tickets')}
-              />
-              <ServiceButton
-                icon={BanknoteArrowUp}
-                title="Fare Info"
-                backgroundColorClass="bg-indigo-50"
-                iconColor="#3F51B5"
-                onPress={() => router.push('/(screens)/fare-info/fare-info')}
-              />
-            </View>
-
-            {/* Second Row */}
-            <View className='flex-row w-full justify-between'>
-              <ServiceButton
-                icon={MapPin}
-                title="Route Map"
-                backgroundColorClass="bg-yellow-50"
-                iconColor="#FBC02D"
-                onPress={() => console.log('Route Map pressed')}
-              />
-              <ServiceButton
-                icon={ClipboardClock}
-                title="Timetables"
-                backgroundColorClass="bg-green-50"
-                iconColor="#388E3C"
-                onPress={() => router.push('/(screens)/time-table/time-table')}
-              />
-              <ServiceButton
-                icon={History}
-                title="History"
-                backgroundColorClass="bg-purple-50"
-                iconColor="#7B1FA2"
-                onPress={() => router.push('/(screens)/history/history')}
-              />
-              <ServiceButton
-                icon={HeartHandshake}
-                title="Support"
-                backgroundColorClass="bg-red-50"
-                iconColor="#D32F2F"
-                onPress={() => console.log('Support pressed')}
-              />
-            </View>
+            ))}
           </View>
 
-          {/* Recent Activity */}
-          <View className='mt-4'>
-            <View className='flex-row justify-between items-center mb-3'>
-              <Text className='text-base font-semibold text-gray-800'>Recent Activity</Text>
-              <TouchableOpacity>
-                <Text className='text-[#4F46E5] text-sm'>See all</Text>
-              </TouchableOpacity>
+          {latestActivities.length === 0 ? (
+            <View className='rounded-3xl border border-dashed border-slate-200 bg-white px-6 py-10 items-center mt-4'>
+              <Text className='text-sm font-poppins-medium text-slate-500'>No activity recorded yet</Text>
+              <Text className='text-xs text-slate-400 mt-2 text-center'>Start travelling or top up to see your history here.</Text>
             </View>
-
-            {recentActivities.length > 0 ? (
-              <View>
-                {recentActivities.map((item, index) => (
-                  <ActivityCard
-                    key={item.id}
-                    activity={item}
-                    onPress={() => console.log('Activity pressed:', item.id)}
-                  />
-                ))}
-              </View>
-            ) : (
-              <View className='bg-gray-50 rounded-xl p-4'>
-                <Text className='text-gray-500 text-center text-sm'>No recent activity</Text>
-              </View>
-            )}
-          </View>
+          ) : null}
         </View>
       </ScrollView>
-
     </SafeAreaView>
   )
 }

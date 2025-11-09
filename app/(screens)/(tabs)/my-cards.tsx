@@ -54,7 +54,7 @@ const MyCardsScreen: React.FC = () => {
 
         <FlatList
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 32, paddingTop: 24 }}
+          contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 32 }}
           data={data}
           keyExtractor={keyExtractor}
           renderItem={renderItem}

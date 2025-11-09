@@ -35,15 +35,15 @@ const TopBar: React.FC = () => {
                         />
                     ) : (
                         <View className="h-full w-full bg-gray-300 justify-center items-center">
-                            <Text className="text-white font-bold">
+                            <Text className="font-bold">
                                 {name.charAt(0)}
                             </Text>
                         </View>
                     )}
                 </View>
                 <View>
-                    <Text className="text-white text-xs opacity-80">{greeting}</Text>
-                    <Text className="text-white font-bold text-lg">{name} 👋</Text>
+                    <Text className="text-xs opacity-80">{greeting}</Text>
+                    <Text className="font-bold text-lg">{name} 👋</Text>
                 </View>
             </TouchableOpacity>
 
@@ -51,7 +51,7 @@ const TopBar: React.FC = () => {
                 className="h-10 w-10 rounded-full bg-white/20 justify-center items-center"
                 onPress={onNotificationPress}
             >
-                <Feather name="bell" size={20} color="white" />
+                <Feather name="bell" size={20} color="black" />
             </TouchableOpacity>
         </View>
     );

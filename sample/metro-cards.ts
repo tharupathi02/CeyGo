@@ -113,8 +113,8 @@ export interface MetroCard {
 
 export const metroCards: MetroCard[] = [
   {
-    id: 'colombo-express',
-    nickname: 'Colombo Express',
+    id: 'express',
+    nickname: 'Express',
     cardNumber: '732184619234',
     cardType: 'Premium',
     balance: 1825.5,
